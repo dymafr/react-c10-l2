@@ -1,19 +1,20 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 
 function App() {
-  console.log('Nouveau rendu');
-  const count = useRef(0);
+  const [value, setValue] = useState('');
+  const timeoutId = useRef(null);
 
-  function handleClick(e) {
-    count.current++;
-    console.log(count.current);
+  function handleChange(e) {
+    setValue(e.target.value);
+    clearTimeout(timeoutId.current);
+    timeoutId.current = setTimeout(() => {
+      console.log(value);
+    }, 3000);
   }
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center p-20">
-      <button onClick={handleClick} className="mb-20">
-        Cliquez
-      </button>
+      <input type="text" value={value} onChange={handleChange} />
     </div>
   );
 }
