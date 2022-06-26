@@ -1,15 +1,18 @@
-import React from 'react';
-
-function handleClick(e, from) {
-  console.log('CLIC', e);
-  console.log('CLIC', from);
-}
+import React, { useRef } from 'react';
 
 function App() {
+  console.log('Nouveau rendu');
+  const count = useRef(0);
+
+  function handleClick(e) {
+    count.current++;
+    console.log(count.current);
+  }
+
   return (
     <div className="d-flex flex-column justify-content-center align-items-center p-20">
-      <button onClick={(e) => handleClick(e, 'button')} className="mb-20">
-        Submit
+      <button onClick={handleClick} className="mb-20">
+        Cliquez
       </button>
     </div>
   );
